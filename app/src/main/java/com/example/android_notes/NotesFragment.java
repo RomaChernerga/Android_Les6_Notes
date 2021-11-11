@@ -26,6 +26,11 @@ public class NotesFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,25 +49,16 @@ public class NotesFragment extends Fragment {
         updateBackground();
     }
 
-    private void updateBackground() {  // метод для подкрашивания строк при выборке и обновления закрашивания строк при выборке
-        LinearLayout linearLayout = getView().findViewById(R.id.notes_container);
-        for (int i = 0; i < linearLayout.getChildCount(); i++) {
-            linearLayout.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
-            if(currentPosition == i) {  //если картинка = клик, то текст закрашиваем серым
-                linearLayout.getChildAt(i).setBackgroundColor(Color.BLUE);
-            }
-        }
-    }
+
 
     private void initView(View view) {
+
         LinearLayout linearLayout = view.findViewById(R.id.notes_container);
-
-        TextView textView2 = new TextView(getContext());
-        textView2.setText("Список заметок");
-        textView2.setTextSize(25);           // выставляем размер текста
-        textView2.setTextColor(Color.BLACK); // выставляем цвет текста
-        linearLayout.addView(textView2);
-
+//        TextView textView2 = new TextView(getContext());
+//        textView2.setText("Список заметок");
+//        textView2.setTextSize(25);           // выставляем размер текста
+//        textView2.setTextColor(Color.BLACK); // выставляем цвет текста
+//        linearLayout.addView(textView2);
 
         String[] notes = getResources().getStringArray(R.array.notes);  //создаем массив строк для списка, что формировали в файле array
         for (int i = 0; i < notes.length; i++) {  // проходимся по массиву заметок
@@ -76,7 +72,7 @@ public class NotesFragment extends Fragment {
             textView.setTextColor(Color.BLACK); // выставляем цвет текста
 
             textView.setOnClickListener(v -> {  // задаем команду при клике на текст
-                currentPosition = position; // созранение картинки в данной позиции
+                currentPosition = position; // сохранение картинки в данной позиции
                 showBody(position);
                 updateBackground();
             });
@@ -87,15 +83,27 @@ public class NotesFragment extends Fragment {
             showBody(currentPosition);
         }
     }
+    private void updateBackground() {  // метод для подкрашивания строк при выборке и обновления закрашивания строк при выборке
 
+        LinearLayout linearLayout = getView().findViewById(R.id.notes_container);
+
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            linearLayout.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
+            if(currentPosition == i) {  //если картинка = клик, то текст закрашиваем синим
+                linearLayout.getChildAt(i).setBackgroundColor(Color.BLUE);
+            }
+        }
+    }
 
 
     void showBody(int position) {
-        BodyNotesFragment bodyNotesFragment = new BodyNotesFragment();
+        BodyNotesFragment bodyNotesFragment = BodyNotesFragment.newInstance(position);
 
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
+                .setCustomAnimations(R.anim.slide, R.anim.slide)
                 .add(R.id.fragment_container1,bodyNotesFragment)
+                .addToBackStack(null)
                 .commit();
     }
 

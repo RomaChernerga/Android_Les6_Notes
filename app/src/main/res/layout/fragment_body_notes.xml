@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/teal_200"
+
     tools:context=".BodyNotesFragment">
 
     <TextView
-        android:id="@+id/note_name"
         android:text="Редактирование заметки"
         android:textStyle="bold"
         android:layout_marginTop="50dp"
@@ -58,6 +58,25 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
+    <LinearLayout
+
+        android:layout_marginTop="510dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/note_back"
+            android:textSize="12sp"
+            android:layout_margin="2dp"
+            android:text="Вернуться"
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
 
 
 
