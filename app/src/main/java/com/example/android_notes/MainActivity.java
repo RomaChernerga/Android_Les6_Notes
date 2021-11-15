@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 onBackPressed();        // обработчик кнопки
                 drawerLayout.closeDrawers();   // для закрытия шторки
                 return true;
-
             }
             return false;
         });
