@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ public class NotesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
+        
         return inflater.inflate(R.layout.fragment_notes, container, false);
     }
 
@@ -95,7 +97,6 @@ public class NotesFragment extends Fragment {
         }
     }
 
-
     void showBody(int position) {
         BodyNotesFragment bodyNotesFragment = BodyNotesFragment.newInstance(position);
 
@@ -116,7 +117,5 @@ public class NotesFragment extends Fragment {
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-
-
     }
 }

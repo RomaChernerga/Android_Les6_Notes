@@ -9,10 +9,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.renderscript.Sampler;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,13 +28,8 @@ import java.util.List;
 
 public class BodyNotesFragment extends Fragment {
 
-
-    public static final String PREFERENCES_NAME = "main";
-    public static final String SAVE_NOTE = "save_note";
-    
     private static final String ARG_POSITION = "ARG_POSITION";
     private int position = -1;  // позиция по умолчанию
-
 
     public BodyNotesFragment() {
         // Required empty public constructor
@@ -51,19 +50,41 @@ public class BodyNotesFragment extends Fragment {
         if (getArguments() != null) {
             position = getArguments().getInt(ARG_POSITION);
         }
-
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+
+        ((AppCompatActivity)requireActivity()).getSupportActionBar().setSubtitle("Редактирование заметки");
+
         return inflater.inflate(R.layout.fragment_body_notes, container, false);
     }
 
     @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        MenuItem menuItem = menu.findItem(R.id.action_about);
+        if(menuItem != null){
+            menuItem.setVisible(false); // скрываем меню
+        }
+
+        menu.add(Menu.NONE, 10, Menu.NONE,"CHANGE TEXT");  // новый элемент в меню
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+
+
         super.onViewCreated(view, savedInstanceState);
 
         EditText editText = view.findViewById(R.id.body_note);  // текстовое поле заметки
@@ -76,26 +97,16 @@ public class BodyNotesFragment extends Fragment {
             requireActivity()
                     .getSupportFragmentManager()
                     .popBackStack(); // для возврата на предыдущий фрагмент
-
         });
-        Button note_save = view.findViewById(R.id.note_save);
+        Button note_save = view.findViewById(R.id.note_save);  // для сохранения заметки(код будет в будущем )))
 
         note_save.setOnClickListener(v -> {
 
-
         });
 
-
-
-
-
-
-
-
-
-
-
     }
+
+
 
 
 }
