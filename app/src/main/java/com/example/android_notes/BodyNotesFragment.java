@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -59,11 +60,15 @@ public class BodyNotesFragment extends Fragment {
 
         ((AppCompatActivity)requireActivity()).getSupportActionBar().setSubtitle("Редактирование заметки");
 
+
         return inflater.inflate(R.layout.fragment_body_notes, container, false);
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+
+
+
         MenuItem menuItem = menu.findItem(R.id.action_about);
         if(menuItem != null){
             menuItem.setVisible(false); // скрываем меню
@@ -83,6 +88,26 @@ public class BodyNotesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+        Button button_exit = view.findViewById(R.id.button_exit);
+        button_exit.setOnClickListener(v -> {
+            new AlertDialog.Builder(requireActivity())
+                    .setMessage("Вы действительно хотите закрыть приложение ?")
+//                    .setTitle("Title")
+                    .setIcon(R.drawable.icon_info)
+                    .setPositiveButton("Да", (dialog, which) -> {
+                        requireActivity().finish(); // обработчик кнопки
+
+                        Toast.makeText(requireActivity(), "Приложение закрыто", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("Нет", (dialog, which) -> {
+                        Toast.makeText(requireActivity(), "Продолжаем работу", Toast.LENGTH_SHORT).show();
+                    })
+                    .show();
+
+        });
+
+
+
 
 
         super.onViewCreated(view, savedInstanceState);
@@ -92,17 +117,13 @@ public class BodyNotesFragment extends Fragment {
         editText.setTypeface(Typeface.SERIF);       // текстовое поле заметки
         editText.setTextSize(20);       // текстовое поле заметки
 
-        Button note_back = view.findViewById(R.id.note_back);
-        note_back.setOnClickListener(v -> {
-            requireActivity()
-                    .getSupportFragmentManager()
-                    .popBackStack(); // для возврата на предыдущий фрагмент
-        });
+
         Button note_save = view.findViewById(R.id.note_save);  // для сохранения заметки(код будет в будущем )))
 
         note_save.setOnClickListener(v -> {
 
         });
+
 
     }
 

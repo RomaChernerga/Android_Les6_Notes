@@ -2,6 +2,7 @@ package com.example.android_notes;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -9,6 +10,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -33,6 +36,22 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         getSupportFragmentManager().popBackStack();
+
+        findViewById(R.id.button_exit).setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setMessage("Вы действительно хотите закрыть приложение ?")
+//                    .setTitle("Title")
+                    .setIcon(R.drawable.icon_info)
+                    .setPositiveButton("Да", (dialog, which) -> {
+                        finish(); // обработчик кнопки
+
+                        Toast.makeText(this, "Приложение закрыто", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("Нет", (dialog, which) -> {
+                        Toast.makeText(this, "Продолжаем работу", Toast.LENGTH_SHORT).show();
+                    })
+                    .show();
+        });
     }
 
     private void initToolbar() {  // метод для ActionBar
@@ -51,9 +70,18 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         NavigationView navigationView  = findViewById(R.id.navigation_view);
+
+
+
+
         navigationView.setNavigationItemSelectedListener(item -> {   // для работы кнопок в шторке
+
+
+
             int id = item.getItemId();
-            if (id == R.id.action_exit) {
+            if
+            (id == R.id.action_exit)
+            {
                 finish(); // обработчик кнопки
                 drawerLayout.closeDrawers();  // для закрытия шторки
                 return true;
