@@ -70,6 +70,7 @@ public class NotesFragment extends Fragment {
             final int position = i;
 
             textView.setText(note);
+
             textView.setTextSize(20);           // выставляем размер текста
             textView.setTextColor(Color.BLACK); // выставляем цвет текста
 

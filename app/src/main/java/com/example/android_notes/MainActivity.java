@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         initToolbar();  // метод для ActionBar
         initToolbar();  // метод для ActionBar
 
@@ -76,17 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setNavigationItemSelectedListener(item -> {   // для работы кнопок в шторке
 
-
-
             int id = item.getItemId();
-            if
-            (id == R.id.action_exit)
-            {
-                finish(); // обработчик кнопки
-                drawerLayout.closeDrawers();  // для закрытия шторки
-                return true;
+            if (id == R.id.action_about) {
 
-            } else if (id == R.id.action_about) {
                 getSupportFragmentManager() // обработчик кнопки
                         .beginTransaction()
                         .addToBackStack("")
@@ -125,19 +118,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) { //для работы меню
         int id = item.getItemId();
 
-        if (id == R.id.action_exit) {
-            finish(); // обработчик кнопки
-            return true;
-        } else if (id == R.id.action_about) {
-                getSupportFragmentManager() // обработчик кнопки
-                .beginTransaction()
-                        .addToBackStack("")
-                        .add(R.id. fragment_container1, new AboutFragment())
-                        .commit();
+        if (id == R.id.action_about) {
+            getSupportFragmentManager() // обработчик кнопки
+                    .beginTransaction()
+                    .addToBackStack("")
+                    .add(R.id. fragment_container1, new AboutFragment())
+                    .commit();
             return true;
         } else if (id == R.id.action_back) {
             onBackPressed();        // обработчик кнопки
-        return true;
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
